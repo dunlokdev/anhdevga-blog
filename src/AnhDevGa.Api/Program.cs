@@ -1,3 +1,4 @@
+using AnhDevGa.Api;
 using AnhDevGa.Core.Domain.Identity;
 using AnhDevGa.Data;
 using Microsoft.AspNetCore.Identity;
@@ -56,5 +57,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Add migration and seed data
+app.MigrateDatabase();
 
 app.Run();

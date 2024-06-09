@@ -40,31 +40,29 @@ namespace AnhDevGa.Data
             builder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => new { x.UserId, x.LoginProvider, x.Name });
         }
 
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
-        {
-            var entries = ChangeTracker
-                .Entries()
-                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
+        //public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        //{
+        //    var entries = ChangeTracker
+        //        .Entries()
+        //        .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
-            foreach (var entityEntry in entries)
-            {
-                var dateCreatedProperty = entityEntry.Entity.GetType().GetProperty("DateCreated");
+        //    foreach (var entityEntry in entries)
+        //    {
+        //        var dateCreatedProperty = entityEntry.Entity.GetType().GetProperty("DateCreated");
 
-                if (dateCreatedProperty != null)
-                {
-                    if (entityEntry.State == EntityState.Added)
-                    {
-                        dateCreatedProperty.SetValue(entityEntry.Entity, DateTime.Now);
-                    }
-                    else if (entityEntry.State == EntityState.Modified)
-                    {
-                        dateCreatedProperty.SetValue(entityEntry.Entity, DateTime.Now);
-                    }
-                }
-            }
-
-
-            return base.SaveChangesAsync(cancellationToken);
-        }
+        //        if (dateCreatedProperty != null)
+        //        {
+        //            if (entityEntry.State == EntityState.Added)
+        //            {
+        //                dateCreatedProperty.SetValue(entityEntry.Entity, DateTime.Now);
+        //            }
+        //            else if (entityEntry.State == EntityState.Modified)
+        //            {
+        //                dateCreatedProperty.SetValue(entityEntry.Entity, DateTime.Now);
+        //            }
+        //        }
+        //    }
+        //    return base.SaveChangesAsync(cancellationToken);
+        //}
     }
 }
