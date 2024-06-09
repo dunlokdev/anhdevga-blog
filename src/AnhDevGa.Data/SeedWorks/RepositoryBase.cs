@@ -42,6 +42,11 @@ namespace AnhDevGa.Data.SeedWorks
 
         public async Task<T> GetByIdAsync(Key id)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
             return await _dbSet.FindAsync(id);
         }
 
